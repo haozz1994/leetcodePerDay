@@ -88,4 +88,23 @@ class Solution1 {
             if (c + 1 < image[0].length) dfs(image, r, c + 1, color, newColor);
         }
     }
+
+
+    // 逃逸优化
+    public static void main(String[] args) {
+
+        for (int i = 0; i < 100000; i++) {
+
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+
+
+            }
+
+
+            System.out.println("");
+
+        }
+    }
 }
