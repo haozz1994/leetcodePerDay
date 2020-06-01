@@ -1,7 +1,7 @@
 package com.haozz.leetcode.leetcode202006.leetcode20200601;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author haozhezhe@yunquna.com
@@ -25,46 +25,84 @@ import java.util.List;
  */
 public class Solution {
 
+//    public static int[] findErrorNums(int[] nums) {
+//
+//        int duplicate = 0;
+//        int lost = 0;
+//
+//
+//        int max = 0;
+//
+//        //找到nums中的最大值
+////        for (int num : nums) {
+////            if (num > max) {
+////                max = num;
+////            }
+////        }
+//
+//        //这里其实是不用找最大值的，nums的长度就是最大值
+//        max = nums.length;
+//
+//        //构造list
+//        List<Integer> list = new ArrayList<>();
+//        for (int i = 1; i <= max; i++) {
+//            list.add(i);
+//        }
+//
+//        //遍历nums，在list中移除
+//        for (int num : nums) {
+//            //如果num不包含num，那么num就是丢失的那个
+//            if (!list.contains(num)) {
+//                lost = num;
+//            } else {
+//                //这里remove的是index，不是object，这就很恶心了
+//                boolean remove = list.remove(new Integer(num));
+//            }
+//        }
+//
+//        //遍历nums移除完成之后，list中剩下的那个就是重复的
+//        duplicate = list.get(0);
+//
+//
+//        int[] result = {duplicate, lost};
+//
+//        return result;
+//    }
+
+
+    /**
+     * map
+     *
+     * @param nums
+     * @return
+     */
     public static int[] findErrorNums(int[] nums) {
 
         int duplicate = 0;
         int lost = 0;
+        Map<Integer, Integer> map = new HashMap<>();
 
-
-        int max = 0;
-
-        //找到nums中的最大值
         for (int num : nums) {
-            if (num > max) {
-                max = num;
-            }
-        }
-
-        //构造list
-        List<Integer> list = new ArrayList<>();
-        for (int i = 1; i <= max; i++) {
-            list.add(i);
-        }
-
-        //遍历nums，在list中移除
-        for (int num : nums) {
-            //如果num不包含num，那么num就是丢失的那个
-            if (!list.contains(num)) {
-                lost = num;
+            if (map.get(num) == null) {
+                map.put(num, 1);
             } else {
-                //这里remove的是index，不是object，这就很恶心了
-                boolean remove = list.remove(new Integer(num));
+                map.put(num, map.get(num) + 1);
             }
         }
 
-        //遍历nums移除完成之后，list中剩下的那个就是重复的
-        duplicate = list.get(0);
+        for (int i = 1; i <= nums.length; i++) {
+            if (map.get(i) == null) {
+                lost = i;
+            } else if (map.get(i) == 2) {
+                duplicate = i;
+            }
+        }
+
+        return new int[]{duplicate, lost};
 
 
-        int[] result = {duplicate, lost};
-
-        return result;
     }
+
 
     public static void main(String[] args) {
         int nums[] = {1, 2, 2, 4};
