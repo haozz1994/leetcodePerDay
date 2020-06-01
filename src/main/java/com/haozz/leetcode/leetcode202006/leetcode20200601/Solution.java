@@ -103,10 +103,37 @@ public class Solution {
 
     }
 
+    /**
+     * 数组
+     *
+     * @param nums
+     * @return
+     */
+    public static int[] finsErrorNums1(int[] nums) {
+
+        int lost = 0;
+        int duplicate = 0;
+        int arr[] = new int[nums.length + 1];
+
+        for (int num : nums) {
+            arr[num] += 1;
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 0) {
+                lost = i;
+            } else if (arr[i] == 2) {
+                duplicate = i;
+            }
+        }
+
+        return new int []{duplicate, lost};
+    }
+
 
     public static void main(String[] args) {
         int nums[] = {1, 2, 2, 4};
-        int[] errorNums = findErrorNums(nums);
+        int[] errorNums = finsErrorNums1(nums);
 
         for (int errorNum : errorNums) {
             System.out.println(errorNum);
