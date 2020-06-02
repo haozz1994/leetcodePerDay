@@ -37,6 +37,19 @@ public class MyCalendar {
 
     /**
      * 暴力穷举法
+     * 复杂度分析
+     *
+     * 时间复杂度：O(N^2)O(N
+     * 2
+     *  )。NN 指的是日常安排的数量，对于每个新的日常安排，我们检查新的日常安排是否发生冲突来决定是否可以预订新的日常安排。所以时间复杂度为 \sum_k^N O(k) = O(N^2)∑
+     * k
+     * N
+     * ​
+     *  O(k)=O(N
+     * 2
+     *  )。
+     * 空间复杂度：O(n)O(n)，calendar 所使用的空间大小。
+     *
      */
     public MyCalendar() {
         list = new ArrayList<>();
