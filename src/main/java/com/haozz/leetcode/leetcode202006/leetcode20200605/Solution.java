@@ -35,6 +35,21 @@ public class Solution {
 
     /**
      * 暴力穷举法
+     * <p>
+     * 官方解释：线性扫描
+     * <p>
+     * 算法：
+     * <p>
+     * 扫描数组找到唯一的最大元素 m，并记录它的索引 maxIndex。
+     * 再次扫描数组，如果我们找到 x != m，m < 2*x，我们应该返回 -1。
+     * 否则返回 maxIndex
+     * PythonJava
+     * <p>
+     * <p>
+     * 复杂度分析
+     * <p>
+     * 时间复杂度：O(N)O(N)。NN 指的是 nums 的大小
+     * 空间复杂度：O(1)O(1)，只用了常数空间。
      *
      * @param nums
      * @return
@@ -58,6 +73,33 @@ public class Solution {
 
         return maxIndex;
     }
+
+    /**
+     * 官网上有一个用最大值和第二大值的方法，很巧妙
+     *
+     * 设置 one、two 表示最大值和第二大值的数字；
+     * 设置 oneIndex 表示最大值的索引；
+     * 通过 for 遍历 nums；
+     * 遍历 nums 过程中：如果这个数 nums[i] 比最大值还大，那么替换掉 two、one、oneIndex；如果这个数 nums[i] 比第二大值还大，那么替换掉第二大值 two。
+     * 判断 one 是否大于或者等于 two * 2，返回 oneIndex 或者 -1。
+     */
+    public int domiantIndex(int nums[]) {
+        int max = 0;
+        int secondMax = 0;
+        int maxIndex = -1;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > max) {
+                secondMax = max;
+                max = nums[i];
+                maxIndex = i;
+            } else if (nums[i] > secondMax) {
+                secondMax = nums[i];
+            }
+        }
+        return max > secondMax << 2 ? maxIndex : -1;
+    }
+
 
     public static void main(String[] args) {
 
