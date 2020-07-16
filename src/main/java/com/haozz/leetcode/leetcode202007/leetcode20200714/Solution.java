@@ -39,18 +39,18 @@ public class Solution {
     /**
      * 方法 1：使用哈希表 [Accepted]  HashMap
      * 在这种方法中，我们枚举 list1 中的每一个字符串，遍历整个 list2 一遍，对每一对字符串都进行比较。我们使用哈希表 map，它包含了形如 (sum: list_{sum})的元素。这里 sum 是匹配元素的下标和，list_{sum}是下标和为 sum 的匹配字符串列表。
-     *
+     * <p>
      * 这样，通过比较，一旦 list1 中第 i 个字符串和 list2 中第 j 个字符串匹配，如果 sum 为 i+j 的条目在 map 中还没有，我们就加一个条目。如果已经存在，由于我们需要保存所有下标和相同的字符串对，所以我们将这对字符串保存到哈希表中。
-     *
+     * <p>
      * 最后我们遍历 map 的键一遍，并找到下标和最小的字符串列表。
-     *
-     *
+     * <p>
+     * <p>
      * 复杂度分析
-     *
+     * <p>
      * 时间复杂度：O(l1 * l2 * x)。list1 中的每个字符串都与 list2 中的字符串进行了比较。l1和l2是 list1 和 list2 列表的长度，x 是字符串的平均长度。
-     *
+     * <p>
      * 空间复杂度：O(l1 * l2 * x)。最坏情况下，list1 和 list2 中所有字符串都相同，那么哈希表最大会变成 l1 * l2 * x，其中 x 是字符串的平均长度。
-     *
+     * <p>
      * <不理解这里和字符串长度有什么关系>
      */
     public String[] findRestaurant(String[] list1, String[] list2) {
@@ -72,4 +72,42 @@ public class Solution {
         String[] res = new String[map.get(min_index_sum).size()];
         return map.get(min_index_sum).toArray(res);
     }
+
+
+    /**
+     * 方法 2： 不使用哈希表 [Accepted]
+     * 算法
+     *
+     * 另一种也可以遍历不同 sum (下标和)，并判断是否有字符串分别出现在 list1 和 list2 中且下标和为 sum。
+     *
+     * 现在我们知道下标和的值 sum 数值范围从 0 到 m+n−1。这里 m 和 n 分别是 list1 和 list2 的长度，我们现在可以升序枚举 sum ，对于每个 sum，我们遍历 list1，假设当前下标为 i，为了得到下标和 sum，list2 中的下标 j 为 sum−i。通过这样的办法，我们不需要遍历 list2，而可以直接通过计算得到在 list2 中对应的下标。
+     *
+     * 对于每个 sum，我们遍历 list1 的所有下标，一旦有 list1 和 list2 中的字符串匹配，就把匹配字符串放入一个 res 列表中。
+     *
+     * 我们对 sum 升序数组中所有值做相同的过程，对于每个 sum 遍历完一遍 list1 之后，我们检查 res 列表是否为空。如果是空的，我们继续遍历下一个 sum 数组。如果不为空，当前的 res 就是最小下标和的数组。这是因为我们遍历 sum 的顺序是升序的，所以第一个找到的列表就是结果列表。
+     *
+     *
+     *
+     * 复杂度分析
+     *
+     * 时间复杂度：O((l1+l2)^2*x)。两重嵌套循环，每一层最多到 l1+l2 ，比较字符串需要花费 x 的时间，这里 x 是字符串的平均长度。
+     *
+     * 空间复杂度：O(r*x)。res 是结果字符串列表，r 是 res 的长度。
+     *
+     */
+    public String[] findRestaurant1(String[] list1, String[] list2) {
+        List<String> res = new ArrayList<>();
+        for (int sum = 0; sum < list1.length + list2.length - 1; sum++) {
+            for (int i = 0; i <= sum; i++) {
+                if (i < list1.length && sum - i < list2.length && list1[i].equals(list2[sum - i])) {
+                    res.add(list1[i]);
+                }
+            }
+            if (res.size() > 0) {
+                break;
+            }
+        }
+        return res.toArray(new String[res.size()]);
+    }
+
 }
