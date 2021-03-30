@@ -33,7 +33,7 @@ package com.haozz.leetcode.leetcode202008.leetcode20200809;
  */
 public class Solution {
 
-    public String addBinary(String a, String b) {
-
-    }
+//    public String addBinary(String a, String b) {
+//
+//    }
 }
