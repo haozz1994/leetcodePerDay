@@ -2,7 +2,7 @@ package com.haozz.leetcode.leetcode202104.leetcode20210402;
 
 /**
  * 栈
- * 496
+ * 496  下一个更大元素
  * https://leetcode-cn.com/problems/next-greater-element-i/
  *
  * @author haozhezhe@yunquna.com
@@ -18,6 +18,12 @@ public class Solution {
         }
     }
 
+    /**
+     * 遍历法
+     * @param nums1
+     * @param nums2
+     * @return
+     */
     public static int[] nextGreaterElement(int[] nums1, int[] nums2) {
         int result[] = new int[nums1.length];
         for (int i = 0; i < nums1.length; i++) {
@@ -40,4 +46,8 @@ public class Solution {
         }
         return result;
     }
+
+    /**
+     * 使用栈
+     */
 }
