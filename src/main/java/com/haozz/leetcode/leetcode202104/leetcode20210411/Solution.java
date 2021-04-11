@@ -1,5 +1,9 @@
 package com.haozz.leetcode.leetcode202104.leetcode20210411;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * https://leetcode-cn.com/problems/contains-duplicate/
  * 217
@@ -37,7 +41,53 @@ package com.haozz.leetcode.leetcode202104.leetcode20210411;
  */
 public class Solution {
 
+    /**
+     * 傻瓜穷举法，在leetcode提交时，因为case数组太长会timeout
+     * @param nums
+     * @return
+     */
+    public boolean containsDuplicate1(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < nums.length; j++) {
+                if(nums[i] == nums[j] && i!=j){
+                    return true;
+                }
+            }
+        }
+        return false;
+
+    }
+
+    /**
+     * 官方解法，排序
+     * 排序后，如果有相邻的元素相等，返回true
+     * @param nums
+     * @return
+     */
     public boolean containsDuplicate(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        for (int i = 0; i < n - 1; i++) {
+            if (nums[i] == nums[i + 1]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 官方解法，hash表
+     * @param nums
+     * @return
+     */
+    public boolean containsDuplicate2(int[] nums) {
+        Set<Integer> set = new HashSet<Integer>();
+        for (int x : nums) {
+            if (!set.add(x)) {
+                return true;
+            }
+        }
+        return false;
 
     }
 }
