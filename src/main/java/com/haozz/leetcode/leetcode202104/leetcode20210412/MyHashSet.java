@@ -19,7 +19,7 @@ public class MyHashSet {
         data = new LinkedList[BASE];
 
 
-        // 这个地方，data初始化为了一个长度为769的空数组，里面每个元素都是null
+        // 这个地方，data已经初始化为一个长度为769的空数组，里面每个元素都是null
         // 如果用加强for循环，因为每个元素都是null，所以无法赋值，循环完成后每个元素还是null
         // 相当于在循环中给每个null做操作，做不了
         for (LinkedList datum : data) {
@@ -34,6 +34,11 @@ public class MyHashSet {
         for (int i = 0; i < data.length; i++) {
             data[i] = new LinkedList<Integer>();
         }
+
+        // 是不是说 ，所有数组都不能这样循环赋值，其实可以想想数组的内存结构，应该比较好理解
+        // 第一步  data = new LinkedList[BASE]  只是开辟了一块长度是BASE的内存空间，并没有给每个元素赋值
+        // 循环的时候，如果不用下标是获取不到每个元素的，也就不能赋值
+
     }
 
     private int hash(int key) {
