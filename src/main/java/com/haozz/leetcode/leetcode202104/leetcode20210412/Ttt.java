@@ -49,12 +49,12 @@ public class Ttt {
         list.add(new Student("b",1));
 
         for (Student student : list) {
-            student.setAge(12);
-            student.setName("change");
+            student = new Student("change", 99);
         }
 
         list.forEach(i -> System.out.println(i));
-        // 但是对集合就不是这样了，增强for循环也可以改变元素，因为上面这个例子中集合的元素是引用类型
+        // 这个地方也是一样，增强for循环中重新赋值，不会改变原集合的元素
+        // 这里使用重新set是可以的，当然可以了，set相当于是改变原来的元素
 
 
 
@@ -72,7 +72,10 @@ public class Ttt {
         }
 
         ll.forEach(i -> System.out.println(i));
-        // 神奇了，这次增强for循环又不生效了，应该是值传递的原因
+        // 这次增强for循环还是不生效，一样的道理
+
+        // 可以这样理解，增强for循环中进行赋值操作，就是把集合或者数组中的每个元素，重新赋值给了一个新的局部变量
+        // 这样当然是不会改变原有元素的
 
 
     }
