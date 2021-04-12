@@ -1,5 +1,8 @@
 package com.haozz.leetcode.leetcode202104.leetcode20210412;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author haozhezhe@yunquna.com
  * @date 11:47 PM 4/12/21
@@ -37,6 +40,39 @@ public class Ttt {
         // 总结：增强for循环的变量只是一个临时变量，并不是数组中的真实元素
         // 赋值时，只是改变了临时变量的值，并不会改变数组元素的值
         // 所以增强for循环只适用于数据读取，不会对原集合或者数组产生改变
+
+        List<Student> list = new ArrayList<>();
+        list.add(new Student("a",1));
+        list.add(new Student("agg",1));
+        list.add(new Student("fdfd",1));
+        list.add(new Student("dd",1));
+        list.add(new Student("b",1));
+
+        for (Student student : list) {
+            student.setAge(12);
+            student.setName("change");
+        }
+
+        list.forEach(i -> System.out.println(i));
+        // 但是对集合就不是这样了，增强for循环也可以改变元素，因为上面这个例子中集合的元素是引用类型
+
+
+
+
+
+        List<Integer> ll = new ArrayList<>();
+        ll.add(1);
+        ll.add(2);
+        ll.add(3);
+        ll.add(4);
+        ll.add(5);
+
+        for (Integer integer : ll) {
+            integer = 99;
+        }
+
+        ll.forEach(i -> System.out.println(i));
+        // 神奇了，这次增强for循环又不生效了，应该是值传递的原因
 
 
     }
