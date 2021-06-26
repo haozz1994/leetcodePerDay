@@ -74,6 +74,9 @@ public class Solution {
      * 空间复杂度：O(N)O(N)，其中 NN 是链表中的节点数。主要为哈希表的开销，最坏情况下我们需要将每个节点插入到哈希表中一次。
      */
     public boolean hasCycle(ListNode head) {
+        if (head == null) {
+            return false;
+        }
         Set<Integer> set = new HashSet<>();
         while (head.next != null) {
             if (!set.add(head.val)) {
