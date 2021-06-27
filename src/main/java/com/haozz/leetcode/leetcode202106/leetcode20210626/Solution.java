@@ -69,7 +69,7 @@ public class Solution {
     /**
      * 哈希表法：
      * 遍历所有节点，并加入到哈希表中，如果某个节点已经存在哈希表中，则代表此前遍历过，也就是链表存在环
-     *
+     * <p>
      * 时间复杂度：O(N)O(N)，其中 NN 是链表中的节点数。最坏情况下我们需要遍历每个节点一次。
      * 空间复杂度：O(N)O(N)，其中 NN 是链表中的节点数。主要为哈希表的开销，最坏情况下我们需要将每个节点插入到哈希表中一次。
      */
@@ -82,6 +82,48 @@ public class Solution {
             head = head.next;
         }
         return false;
+    }
+
+
+    /**
+     * 双指针算法
+     * <p>
+     * 定义两个指针，
+     * 快指针：每次前进两格
+     * 慢指针：每次前进一格
+     * 两个指针在链表上移动
+     * <p>
+     * 如果链表没有环，那么在结束之前，快指针将一直在慢指针的前面
+     * 如果链表有环，那么由于存在速度差，快慢指针将在环中某个节点上相遇
+     *
+     * @return
+     */
+    public boolean hasCycle2(ListNode head) {
+        if (head == null || head.next == null) {
+            return false;
+        }
+        // 慢指针
+        ListNode slow = head;
+
+        // 快指针
+        ListNode fast = head.next;
+
+        // 如果两个节点没有相遇，就一直向下移动
+        while (slow != fast) {
+            // 快指针到达了链表的尾部，说明没有环
+            if(fast == null || fast.next == null){
+                return false;
+            }
+
+            // 慢指针前进一格
+            slow = slow.next;
+
+            // 快指针前进两格
+            fast = fast.next.next;
+        }
+
+        // 没有进while循环，说明slow == fast，也就是快慢指针相遇了
+        return true;
     }
 }
 
